@@ -1,28 +1,15 @@
 package main
 
 import (
-	"enigmacamp.com/gowmb/util"
-	"gorm.io/driver/postgres"
-	"gorm.io/gorm"
-	"gorm.io/gorm/schema"
+	"enigmacamp.com/gowmb/config"
+	"enigmacamp.com/gowmb/repository"
+	"fmt"
 )
 
 func main() {
-	dsn := util.CreateDataSourceName()
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
-		NamingStrategy: schema.NamingStrategy{
-			TablePrefix: util.TablePrefix(),
-		}})
-	if err != nil {
-		panic(err)
-	}
-	enigmaDb, err := db.DB()
-	err = enigmaDb.Ping()
-	if err != nil {
-		panic(err)
-	}
-	//db.AutoMigrate(&model.Menu{}, &model.MenuPrice{}, &model.Discount{}, &model.Customer{}, &model.TransType{}, &model.Table{}, &model.Bill{}, &model.BillDetail{})
-
+	cfg := config.NewConfig()
+	db := cfg.DbConn()
+	//migration.DbMigration(db)
 	//1. Daftarkan Discount 10% di master discount
 	//dbRepo := repository.NewDiscountRepository(db)
 	//disc := model.Discount{
@@ -74,10 +61,10 @@ func main() {
 	//}
 	//fmt.Println(count)
 	//5. Cari informasi member berserta discountnya dengan nama munaroh
-	//customerRepo := repository.NewCustomerRepository(db)
-	//customers, err := customerRepo.FindAllBy("Discounts", "customer_name ILIKE ?", "%munaroh%")
-	//if err != nil {
-	//	panic(err)
-	//}
-	//fmt.Println(customers)
+	customerRepo := repository.NewCustomerRepository(db)
+	customers, err := customerRepo.FindAllBy("Discounts", "customer_name ILIKE ?", "%munaroh%")
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(customers)
 }

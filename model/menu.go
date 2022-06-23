@@ -1,7 +1,7 @@
 package model
 
 import (
-	"enigmacamp.com/gowmb/util"
+	"enigmacamp.com/gowmb/config"
 	"fmt"
 )
 
@@ -12,7 +12,7 @@ type Menu struct {
 }
 
 func (Menu) TableName() string {
-	return util.PrefixedTableName("m_menu")
+	return config.PrefixedTableName("m_menu")
 }
 func (m Menu) String() string {
 	return fmt.Sprintf("Id: %d, Name: %s, MenuPrice: %v", m.ID, m.MenuName, m.MenuPrices)

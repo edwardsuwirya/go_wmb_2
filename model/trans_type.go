@@ -1,7 +1,7 @@
 package model
 
 import (
-	"enigmacamp.com/gowmb/util"
+	"enigmacamp.com/gowmb/config"
 	"fmt"
 )
 
@@ -11,7 +11,7 @@ type TransType struct {
 }
 
 func (TransType) TableName() string {
-	return util.PrefixedTableName("m_trans_type")
+	return config.PrefixedTableName("m_trans_type")
 }
 func (c TransType) String() string {
 	return fmt.Sprintf("Id: %d, Description: %s", c.ID, c.Description)

@@ -1,6 +1,9 @@
 package model
 
-import "fmt"
+import (
+	"enigmacamp.com/gowmb/config"
+	"fmt"
+)
 
 type Discount struct {
 	ID          uint `gorm:"primaryKey;autoIncrement"`
@@ -9,7 +12,7 @@ type Discount struct {
 }
 
 func (Discount) TableName() string {
-	return "restowmb.m_discount"
+	return config.PrefixedTableName("m_discount")
 }
 func (d Discount) String() string {
 	return fmt.Sprintf("Id: %d, Description: %s, Pct: %d", d.ID, d.Description, d.Pct)

@@ -1,7 +1,7 @@
 package model
 
 import (
-	"enigmacamp.com/gowmb/util"
+	"enigmacamp.com/gowmb/config"
 	"fmt"
 )
 
@@ -15,7 +15,7 @@ type Customer struct {
 }
 
 func (Customer) TableName() string {
-	return util.PrefixedTableName("m_customer")
+	return config.PrefixedTableName("m_customer")
 }
 func (c Customer) String() string {
 	return fmt.Sprintf("Id: %d, Name: %s, Phone: %s, Member: %v, Bills: %v, Disc: %v", c.ID, c.CustomerName, c.MobilePhoneNo, c.IsMember, c.Bills, c.Discounts)
