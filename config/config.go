@@ -1,10 +1,10 @@
 package config
 
 const (
-	DbHost     = "167.172.69.254"
+	DbHost     = ""
 	DbPort     = "5432"
 	DbUser     = "smm2"
-	DbPassword = "5mmB2"
+	DbPassword = ""
 	DbName     = "smm2"
 	DbSchema   = "restowmb"
 )
