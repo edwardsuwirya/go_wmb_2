@@ -3,7 +3,7 @@ package main
 import (
 	"enigmacamp.com/gowmb/config"
 	"enigmacamp.com/gowmb/repository"
-	"fmt"
+	"log"
 )
 
 func main() {
@@ -61,10 +61,34 @@ func main() {
 	//}
 	//fmt.Println(count)
 	//5. Cari informasi member berserta discountnya dengan nama munaroh
-	customerRepo := repository.NewCustomerRepository(db)
-	customers, err := customerRepo.FindAllBy("Discounts", "customer_name ILIKE ?", "%munaroh%")
+	//customerRepo := repository.NewCustomerRepository(db)
+	//customers, err := customerRepo.FindAllBy("Discounts", "customer_name ILIKE ?", "%munaroh%")
+	//if err != nil {
+	//	panic(err)
+	//}
+	//fmt.Println(customers)
+
+	//1. Daftarkan 4 table (Bulk Insert)
+	//dbRepo := repository.NewTableRepository(db)
+	//tables := []model.Table{
+	//	{TableDescription: "T01"},
+	//	{TableDescription: "T02"},
+	//	{TableDescription: "T03"},
+	//	{TableDescription: "T04"},
+	//}
+	//err := dbRepo.CreateBulk(tables)
+	//if err != nil {
+	//	panic(err)
+	//}
+
+	//2. Update Table T03 karena ada pemakaian
+	dbRepo := repository.NewTableRepository(db)
+	table, err := dbRepo.FindById(3)
 	if err != nil {
-		panic(err)
+		log.Println(err)
 	}
-	fmt.Println(customers)
+	err = dbRepo.Update(&table, map[string]interface{}{"is_available": false})
+	if err != nil {
+		log.Println(err)
+	}
 }
